@@ -1,4 +1,9 @@
 <?php
+// Mostrar cualquier error en pantalla (solo para diagnóstico)
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 header('Content-Type: text/plain; charset=UTF-8');
 
 function read($k) { $v = getenv($k); return ($v === false) ? '' : $v; }
@@ -39,3 +44,4 @@ try {
     http_response_code(500);
     echo "CONN=FAIL: " . $e->getMessage() . "\n";
 }
+
