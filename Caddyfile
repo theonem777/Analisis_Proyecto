@@ -1,37 +1,6 @@
-:80 {
-    encode gzip
-    # Carpeta raíz del proyecto (donde está index.php)
+:{$PORT} {
     root * /app
-
-    # 1) Si piden algo dentro de /public, entrégalo tal cual
-    handle_path /public/* {
-        root * /app
-        file_server
-    }
-
-    # 2) Mapear prefijos habituales de estáticos hacia /public
-    #    (sin modificar las rutas en tu HTML/PHP)
-    handle_path /css/* {
-        root * /app/public
-        file_server
-    }
-    handle_path /js/* {
-        root * /app/public
-        file_server
-    }
-    handle_path /img/* {
-        root * /app/public
-        file_server
-    }
-    handle_path /images/* {
-        root * /app/public
-        file_server
-    }
-    handle_path /assets/* {
-        root * /app/public
-        file_server
-    }
-
-    # 3) Todo lo demás que no sea estático, va a PHP
     php_server
+    encode zstd gzip
+    file_server
 }
