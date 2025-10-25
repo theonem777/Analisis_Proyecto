@@ -1,0 +1,8 @@
+{
+  "name": "analisis/proyecto",
+  "type": "project",
+  "require": {
+    "ext-pdo_mysql": "*",
+    "ext-mysqli": "*"
+  }
+}
