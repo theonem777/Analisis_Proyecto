@@ -1,6 +1,23 @@
-:{$PORT} {
-    root * /app
-    php_server
+:80 {
     encode zstd gzip
-    file_server
+
+    # Raíz del proyecto (tu index.php está en /app)
+    root * /app
+
+    # 1) Servir cualquier archivo dentro de /public tal cual
+    handle_path /public/* {
+        file_server
+    }
+
+    # 2) Mapear rutas comunes de estáticos hacia /public
+    #    (sin modificar el código de tus vistas)
+    @static path_regexp static ^/(css|js|img|images|assets)/.*$
+    handle @static {
+        # Mantiene el prefijo (css/js/img/...), pero sirve desde /app/public
+        root * /app/public
+        file_server
+    }
+
+    # 3) Todo lo demás a PHP
+    php_server
 }
